@@ -19,12 +19,14 @@
 
 package io.cordova.hellocordova;
 
-//import android.app.NotificationManager;
+import android.app.NotificationManager;
 import android.os.Bundle;
 import android.widget.Toast;
 
-//import com.flybits.concierge.ConciergeConfiguration;
-//import com.flybits.concierge.FlybitsConcierge;
+import com.flybits.commons.library.api.idps.AnonymousIDP;
+import com.flybits.commons.library.logging.VerbosityLevel;
+import com.flybits.concierge.ConciergeConfiguration;
+import com.flybits.concierge.FlybitsConcierge;
 
 import org.apache.cordova.*;
 
@@ -46,7 +48,25 @@ public class MainActivity extends CordovaActivity
 
         Toast.makeText(this,"this is flybits",Toast.LENGTH_LONG).show();
 
-//        FlybitsConcierge.with(this);
+        FlybitsConcierge flybitsConcierge = FlybitsConcierge.with(this);
+        flybitsConcierge.setLoggingVerbosity(VerbosityLevel.ALL);
+
+        if (!flybitsConcierge.isInitialized()){
+            ConciergeConfiguration configuration = new ConciergeConfiguration.Builder("your-flybits-project-id")
+                    .setTermsAndServicesRequired("https://flybits.com/legal/terms-of-use")
+                    .setPrivacyPolicyUrl("https://flybits.com/legal/privacy-policy")
+                    .setTimeToUploadContext(2).build();
+
+            flybitsConcierge.initialize(configuration);
+        }
+
+        try {
+            flybitsConcierge.authenticate(new AnonymousIDP());
+
+        } catch (Exception e) {
+            e.getStackTrace();
+        }
+
 
 
     }
