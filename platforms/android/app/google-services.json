@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "62162144941",
+    "firebase_url": "https://dordova-test.firebaseio.com",
+    "project_id": "dordova-test",
+    "storage_bucket": "dordova-test.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:62162144941:android:2a1b5d8f123d3af680c024",
+        "android_client_info": {
+          "package_name": "io.cordova.hellocordova"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "62162144941-itghf3m5r10o7utac7iljj03doggj4d5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBzcTseZ86IDgTngbg_RrDoJZi8uln5Mns"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "62162144941-itghf3m5r10o7utac7iljj03doggj4d5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

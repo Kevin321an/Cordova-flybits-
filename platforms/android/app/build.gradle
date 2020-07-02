@@ -18,8 +18,10 @@
 */
 
 apply plugin: 'com.android.application'
-
+apply plugin: 'kotlin-android'
+apply plugin: 'com.google.gms.google-services'
 buildscript {
+    ext.kotlin_version = '1.3.61'
     repositories {
         mavenCentral()
         google()
@@ -28,6 +30,7 @@ buildscript {
 
     dependencies {
         classpath 'com.android.tools.build:gradle:3.3.0'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
 
@@ -295,6 +298,8 @@ dependencies {
     implementation(project(path: ":CordovaLib"))
     // SUB-PROJECT DEPENDENCIES END
     implementation 'com.flybits.concierge:smart-rewards:3.3.0'
+    implementation 'com.android.support:appcompat-v7:28.0.0'
+    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
 }
 
 def promptForReleaseKeyPassword() {
