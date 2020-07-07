@@ -48,24 +48,12 @@ public class MainActivity extends CordovaActivity
         // Set by <content src="index.html" /> in config.xml
         loadUrl(launchUrl);
 
-        Toast.makeText(this,"this is flybits",Toast.LENGTH_LONG).show();
+        Toast.makeText(this,"this is flybits_Cordova_demo",Toast.LENGTH_LONG).show();
 
 
 
 
         startActivity(new Intent(this,MainActivity2.class));
-
-
-
-//
-//        try {
-//            flybitsConcierge.authenticate(new AnonymousIDP());
-//
-//        } catch (Exception e) {
-//            e.getStackTrace();
-//        }
-
-
 
     }
 }

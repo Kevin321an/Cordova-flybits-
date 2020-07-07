@@ -1,6 +1,12 @@
 package io.cordova.hellocordova
 
+import android.Manifest
+import android.app.Activity
+import android.content.pm.PackageManager
 import android.os.Bundle
+import android.support.v4.app.ActivityCompat
+import android.support.v4.content.ContextCompat
+import android.support.v7.app.AlertDialog
 import android.view.View
 import android.widget.Button
 import android.widget.Toast
@@ -16,6 +22,9 @@ import com.flybits.concierge.smartrewards.viewproviders.BenefitsViewProvider
 import com.flybits.concierge.smartrewards.viewproviders.ConfirmationViewProvider
 import com.flybits.concierge.smartrewards.viewproviders.OffersViewProvider
 import com.flybits.concierge.smartrewards.viewproviders.OptInViewProvider
+import com.flybits.context.ContextManager
+import com.flybits.context.ReservedContextPlugin
+import com.flybits.context.plugins.FlybitsContextPlugin
 import org.apache.cordova.CordovaActivity
 
 const val PROJECT_ID_KEVIN = "C0C7D7D7-9716-4223-B4DB-1C9CC560E3C3"
@@ -29,6 +38,8 @@ class MainActivity2 : CordovaActivity() {
         val login = this.findViewById<Button>(R.id.login)
         val logOut = this.findViewById<Button>(R.id.logout)
         val flybitsLogin = this.findViewById<Button>(R.id.twoStepLogin)
+        val startLocation = this.findViewById<Button>(R.id.startLocation)
+        val stop_location = this.findViewById<Button>(R.id.stop_location)
 
 
         val concierge = FlybitsConcierge.with(this)
@@ -40,10 +51,8 @@ class MainActivity2 : CordovaActivity() {
                     .setTimeToUploadContext(2).build()
             concierge.initialize(configuration)
             // register custom content types here
-            val offerViewProvider = OffersViewProvider(applicationContext, CustomOfferUserActionHandler())
-            val benefitsViewProvider = BenefitsViewProvider(applicationContext, CustomBenefitUserActionHandler())
-            concierge.registerFlybitsViewProvider(benefitsViewProvider)
-            concierge.registerFlybitsViewProvider(offerViewProvider)
+            concierge.registerFlybitsViewProvider(BenefitsViewProvider(applicationContext))
+            concierge.registerFlybitsViewProvider(OffersViewProvider(applicationContext))
             concierge.registerFlybitsViewProvider(OptInViewProvider(applicationContext))
             concierge.registerFlybitsViewProvider(ConfirmationViewProvider(applicationContext))
         }
@@ -105,11 +114,22 @@ class MainActivity2 : CordovaActivity() {
                     optin
                     ,null)
         }
+
+
+        startLocation.setOnClickListener {
+            val plugin = FlybitsContextPlugin.Builder( ReservedContextPlugin.LOCATION).build()
+            ContextManager.start(applicationContext, plugin)
+        }
+
+        stop_location.setOnClickListener {
+            val plugin = FlybitsContextPlugin.Builder( ReservedContextPlugin.LOCATION).build()
+            ContextManager.stop(applicationContext, plugin)
+        }
     }
+
 
     private fun showToast(message: String) {
         Toast.makeText(applicationContext, message, Toast.LENGTH_LONG).show()
     }
-
 
 }
